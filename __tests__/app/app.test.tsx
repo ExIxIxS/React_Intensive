@@ -1,5 +1,5 @@
 import { render, cleanup } from '@testing-library/react';
-import App from '../../src/components/app';
+import App from '../../src/components/ui/app';
 
 describe('App', () => {
   afterEach(() => {
