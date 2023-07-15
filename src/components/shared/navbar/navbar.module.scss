@@ -1,0 +1,17 @@
+.navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  background-color: whitesmoke;
+}
+
+.navLink.isActive {
+  background-color: beige;
+}
+
+.navLink {
+  background-color: plum;
+  padding: 10px;
+}

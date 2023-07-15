@@ -1,24 +1,19 @@
 import { NavLink } from 'react-router-dom';
 
 import { NavData } from 'src/interfaces/navData.interfaces';
+import styles from 'src/components/shared/navbar/navbar.module.scss';
 
-interface NavbarProps {
-  navData: NavData;
-}
-
-function Navbar(props: NavbarProps): JSX.Element {
+function Navbar(props: { navData: NavData }): JSX.Element {
   return (
-    <nav className="navbar">
-      {props.navData.map((navItem) => {
+    <nav className={styles.navbar}>
+      {props.navData.map((navDataItem) => {
         return (
           <NavLink
-            key={navItem.id}
-            to={navItem.path}
-            className={({ isActive, isPending }) =>
-              isPending ? 'pending' : isActive ? 'active' : ''
-            }
+            key={navDataItem.id}
+            to={navDataItem.path}
+            className={({ isActive }) => `${styles.navLink} ${isActive ? styles.isActive : ''}`}
           >
-            {navItem.title}
+            {navDataItem.title}
           </NavLink>
         );
       })}

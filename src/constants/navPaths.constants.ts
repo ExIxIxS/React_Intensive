@@ -1,5 +1,5 @@
 const appNavPaths = [
-  { title: 'Main page', path: '/main' },
+  { title: 'Main page', path: '/' },
   { title: 'About', path: '/about' },
 ];
 

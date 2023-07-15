@@ -1,5 +1,5 @@
-function NotFound(): JSX.Element {
+function NotFoundPage(): JSX.Element {
   return <div className="not-found">Not found page</div>;
 }
 
-export default NotFound;
+export default NotFoundPage;
