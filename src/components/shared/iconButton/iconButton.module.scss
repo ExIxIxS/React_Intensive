@@ -1,0 +1,24 @@
+$button-size: 60px;
+$background-color: lightsalmon;
+
+.button {
+  width: $button-size;
+  height: $button-size;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  border: 1px solid black;
+  background-color: $background-color;
+  padding: 0;
+  overflow: hidden;
+}
+
+.button {
+  cursor: pointer;
+}
+
+.image {
+  width: 100%;
+  height: auto;
+}

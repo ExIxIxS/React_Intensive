@@ -1,5 +1,5 @@
 import { appNavPaths } from 'src/constants/navPaths.constants';
-import { NavData, NavInitDataItem } from 'src/interfaces/navData.interfaces';
+import { NavData, NavInitDataItem } from 'src/components/shared/navbar/navbar.interfaces';
 import { addIdToObject } from './componentsFunctions';
 
 function getNavDataItems(): NavData {

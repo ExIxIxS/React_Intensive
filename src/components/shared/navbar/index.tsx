@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 
-import { NavData } from 'src/interfaces/navData.interfaces';
+import { NavData } from 'src/components/shared/navbar/navbar.interfaces';
 import styles from 'src/components/shared/navbar/navbar.module.scss';
 
 function Navbar(props: { navData: NavData }): JSX.Element {
