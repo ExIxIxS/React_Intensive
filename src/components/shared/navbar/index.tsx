@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 
-import { NavData } from 'src/interfaces';
+import { NavData } from 'src/interfaces/navData.interfaces';
 
 interface NavbarProps {
   navData: NavData;
