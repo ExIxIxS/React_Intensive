@@ -1,5 +1,5 @@
 import { render, cleanup } from '@testing-library/react';
-import App from '../../src/components/ui/app';
+import App from 'src/components/ui/app';
 
 describe('App', () => {
   afterEach(() => {
@@ -8,8 +8,10 @@ describe('App', () => {
 
   it('renders the app component', () => {
     const { container } = render(<App />);
-    const appElement = container.querySelector('.main-page');
+    const headerElement = container.querySelector('header');
+    const mainElement = container.querySelector('main');
 
-    expect(appElement).toBeInTheDocument();
+    expect(headerElement).toBeInTheDocument();
+    expect(mainElement).toBeInTheDocument();
   });
 });
