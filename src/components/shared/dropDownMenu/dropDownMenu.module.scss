@@ -1,3 +1,12 @@
+@import 'src/styles/variables';
+
+$background-color-item: $background-color-main-3;
+$color-border: $background-color-icons;
+$color-item: $color-menu-item;
+$border-radius-item: $border-radius-menu-button-default;
+$font-size-item: $font-size-md;
+$font-size-active-item: $font-size-llg;
+
 .menu {
   position: relative;
   display: flex;
@@ -6,30 +15,39 @@
 }
 
 .menu-list {
-  width: 100px;
+  display: flex;
   position: absolute;
-  top: 110%;
-  overflow: auto;
+  top: 120%;
+  flex-direction: column;
 }
 
 .menu-list--right {
   right: 0;
+  align-items: flex-end;
 }
 
 .menu-list--left {
   left: 0;
+  align-items: flex-start;
 }
 
 .menu-list-item {
+  width: max-content;
+  height: 40px;
   margin: 5px 0;
   padding: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid black;
-  background-color: olive;
+  background-color: $background-color-item;
+  border-radius: $border-radius-item;
+  color: $color-item;
+  font-size: $font-size-item;
+  box-shadow: 0px 0px 8px 1px $background-color-item;
+  transition: font-size 0.5s;
 }
 
 .menu-list-item:hover {
   cursor: pointer;
+  font-size: $font-size-active-item;
 }

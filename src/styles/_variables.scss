@@ -1,15 +1,22 @@
 // ==================== General ===================
 
 // ===================== Color ====================
-$background-color-default: #000;
+$background-color-default: #3da0b1;
 $background-color-icons: #4d4949;
+$background-color-main-1: #65729e;
+$background-color-main-2: #00dffe;
+$background-color-main-3: #f9f9f9;
+$background-color-main-4: #ddfbff;
 
+$color-default: #4d4949;
+$color-contrast-default: #f9f9f9;
+$color-menu-item: #36757f;
 
+// ===================== Font ====================
 $font-weight-light: 300;
 $font-weight-normal: 400;
 $font-weight-bold: 500;
 $font-weight-bolder: 700;
-
 $font-size-xs: 12px;
 $font-size-sm: 14px;
 $font-size-md: 16px;
@@ -19,3 +26,7 @@ $font-size-lgg: 22px;
 $font-size-xlg: 24px;
 $font-size-xxlg: 28px;
 $font-size-xxxlg: 36px;
+
+// ===================== Sizes ====================
+$round-button-size-default: 60px;
+$border-radius-menu-button-default: 3px;

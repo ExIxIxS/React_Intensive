@@ -1,17 +1,30 @@
+@import 'src/styles/variables';
+
+$background-color: $background-color-icons;
+$color: $color-contrast-default;
+$background-color-active: $background-color-main-3;
+$color-active: $color-default;
+$border-radius-item: $border-radius-menu-button-default;
+
 .navbar {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
   gap: 10px;
-  background-color: whitesmoke;
-}
-
-.navLink.isActive {
-  background-color: beige;
 }
 
 .navLink {
-  background-color: plum;
   padding: 10px;
+  border-radius: $border-radius-item;
+  color: $color;
+  background-color: $background-color;
+  transition: color 6s;
+}
+
+.navLink.isActive {
+  color: $color-active;
+  background-color: $background-color-active;
+  box-shadow: 0px 0px 8px 1px $background-color-active;
+  transition: color 0.5s;
 }
