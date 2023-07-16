@@ -9,6 +9,7 @@ interface DropDownMenuPropsItem {
 interface DropDownMenuProps {
   menuItems: DropDownMenuPropsItem[];
   position: MenuPositions;
+  iconSrc?: string;
 }
 
 export type { DropDownMenuPropsItem, DropDownMenuProps, MenuPositions };

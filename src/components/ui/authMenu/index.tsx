@@ -32,7 +32,9 @@ function AuthMenu(): JSX.Element {
     setMenuItems(newMenuItems);
   }, [isUthorized]);
 
-  return <DropDownMenu menuItems={menuItems} position="right" />;
+  return (
+    <DropDownMenu menuItems={menuItems} position="right" iconSrc="src/assets/icons/user.png" />
+  );
 }
 
 export default AuthMenu;

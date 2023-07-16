@@ -18,7 +18,7 @@ function DropDownMenu(props: DropDownMenuProps): JSX.Element {
   };
 
   const menuButtonProps: IconButtonProps = {
-    iconSrc: 'src/assets/icons/react.png',
+    iconSrc: props.iconSrc ?? 'src/assets/icons/react.png',
     alt: 'Menu Icon',
     handleClick: toggleMenu,
   };
