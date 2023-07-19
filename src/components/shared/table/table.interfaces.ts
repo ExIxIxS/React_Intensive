@@ -18,6 +18,7 @@ interface CategoryProps {
 }
 
 interface ItemProps {
+  categoryId: string;
   data: TableItemData;
 }
 

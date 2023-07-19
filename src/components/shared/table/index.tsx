@@ -1,7 +1,9 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { CategoryProps, ItemProps, TableProps } from 'src/components/shared/table/table.interfaces';
 
 import styles from 'src/components/shared/table/table.module.scss';
+import { AppDispatch } from 'src/store';
 
 function Table(props: TableProps): JSX.Element {
   return (
@@ -24,7 +26,9 @@ function Table(props: TableProps): JSX.Element {
 
 function CategoryItem(props: CategoryProps): JSX.Element {
   const [isExpanded, setIsExpanded] = useState(false);
+  const dispatch = useDispatch<AppDispatch>();
 
+  const deleteItem = () => dispatch({ type: 'tableData/deleteCategory', payload: props.data.id });
   const toogleIsExpanded = () => setIsExpanded(!isExpanded);
 
   return (
@@ -38,22 +42,40 @@ function CategoryItem(props: CategoryProps): JSX.Element {
         </td>
         <td>Checkbox</td>
         <td>{props.data.description}</td>
-        <td>Delete</td>
+        <td>
+          <button className={styles['delete-button']} onClick={deleteItem}>
+            Delete
+          </button>
+        </td>
       </tr>
       {isExpanded &&
         props.data.items &&
-        props.data.items.map((item) => <TableItem key={item.id} data={item} />)}
+        props.data.items.map((item) => (
+          <TableItem key={item.id} categoryId={props.data.id} data={item} />
+        ))}
     </>
   );
 }
 
 function TableItem(props: ItemProps): JSX.Element {
+  const dispatch = useDispatch<AppDispatch>();
+
+  const deleteItem = () =>
+    dispatch({
+      type: 'tableData/deleteItem',
+      payload: { categoryId: props.categoryId, itemId: props.data.id },
+    });
+
   return (
     <tr className={styles['table-item']}>
       <td>{props.data.name}</td>
       <td>Checkbox</td>
       <td>{props.data.description}</td>
-      <td>Delete</td>
+      <td>
+        <button className={styles['delete-button']} onClick={deleteItem}>
+          Delete
+        </button>
+      </td>
     </tr>
   );
 }

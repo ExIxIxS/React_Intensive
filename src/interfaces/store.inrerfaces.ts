@@ -20,4 +20,16 @@ interface TableDataState {
   value: CategoryData[];
 }
 
-export type { DeviceType, Resolution, MediaQuery, MediaQueryState, TableDataState };
+interface DeleteItemPayload {
+  categoryId: string;
+  itemId: string;
+}
+
+export type {
+  DeviceType,
+  Resolution,
+  MediaQuery,
+  MediaQueryState,
+  TableDataState,
+  DeleteItemPayload,
+};
