@@ -1,0 +1,28 @@
+@import 'src/styles/variables';
+
+$background-color: $background-color-icons;
+$button-size: $round-button-size-default;
+$border-color: $background-color-main-2;
+
+.button {
+  width: $button-size;
+  height: $button-size;
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  background-color: $background-color;
+  border-radius: 50%;
+  border-color: $border-color;
+}
+
+.button {
+  cursor: pointer;
+}
+
+.image {
+  width: 100%;
+  height: auto;
+}

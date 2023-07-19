@@ -1,0 +1,11 @@
+@import 'src/styles/variables';
+
+$background-color: $background-color-icons;
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: $background-color;
+}
