@@ -1,3 +1,5 @@
+import { CategoryData } from 'src/components/shared/table/table.interfaces';
+
 type DeviceType = 'mobile' | 'desktop';
 
 interface Resolution {
@@ -14,4 +16,8 @@ interface MediaQueryState {
   value: MediaQuery;
 }
 
-export type { DeviceType, Resolution, MediaQuery, MediaQueryState };
+interface TableDataState {
+  value: CategoryData[];
+}
+
+export type { DeviceType, Resolution, MediaQuery, MediaQueryState, TableDataState };

@@ -1,0 +1,35 @@
+@import 'src/styles/variables';
+
+$background-color-header: $background-color-main-3;
+$background-color-body: $background-color-main-4;
+$background-color-active: $background-color-default;
+
+$color: $color-contrast-default;
+$color-active: $color-default;
+
+$color-border: $background-color-default;
+
+$border-radius-button: $border-radius-menu-button-default;
+
+.table {
+  width: 100%;
+}
+
+.table-header {
+  height: 40px;
+  background-color: $background-color-header;
+}
+
+.table-item {
+  height: 30px;
+  background-color: $background-color-body;
+}
+
+.expand-button {
+  width: 24px;
+  height: 24px;
+  border-radius: $border-radius-button;
+  text-align: center;
+  border: 1px solid $color-border;
+
+}
