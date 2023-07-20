@@ -15,11 +15,18 @@ interface TableProps {
 
 interface CategoryProps {
   data: CategoryData;
+  rowIndex: number;
 }
 
 interface ItemProps {
   categoryId: string;
   data: TableItemData;
+  rowIndex: number;
 }
 
-export type { TableItemData, CategoryData, TableProps, CategoryProps, ItemProps };
+interface ActiveCell {
+  row: number;
+  column: number;
+}
+
+export type { TableItemData, CategoryData, TableProps, CategoryProps, ItemProps, ActiveCell };

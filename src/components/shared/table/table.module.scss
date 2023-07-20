@@ -2,7 +2,7 @@
 
 $background-color-header: $background-color-main-3;
 $background-color-body: $background-color-main-4;
-$background-color-active: $background-color-default;
+$background-color-active: $background-color-main-2;
 
 $color: $color-contrast-default;
 $color-active: $color-default;
@@ -31,5 +31,8 @@ $border-radius-button: $border-radius-menu-button-default;
   border-radius: $border-radius-button;
   text-align: center;
   border: 1px solid $color-border;
+}
 
+.active-cell {
+  background-color: $background-color-active;
 }

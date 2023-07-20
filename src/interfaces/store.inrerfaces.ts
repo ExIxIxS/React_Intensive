@@ -1,4 +1,4 @@
-import { CategoryData } from 'src/components/shared/table/table.interfaces';
+import { ActiveCell, CategoryData } from 'src/components/shared/table/table.interfaces';
 
 type DeviceType = 'mobile' | 'desktop';
 
@@ -16,8 +16,9 @@ interface MediaQueryState {
   value: MediaQuery;
 }
 
-interface TableDataState {
-  value: CategoryData[];
+interface TableState {
+  data: CategoryData[];
+  activeCell: ActiveCell;
 }
 
 interface DeleteItemPayload {
@@ -25,11 +26,4 @@ interface DeleteItemPayload {
   itemId: string;
 }
 
-export type {
-  DeviceType,
-  Resolution,
-  MediaQuery,
-  MediaQueryState,
-  TableDataState,
-  DeleteItemPayload,
-};
+export type { DeviceType, Resolution, MediaQuery, MediaQueryState, TableState, DeleteItemPayload };

@@ -3,14 +3,18 @@ import { v4 as uuid } from 'uuid';
 
 import { RootState } from 'src/store';
 
-import { CategoryData } from 'src/components/shared/table/table.interfaces';
-import { DeleteItemPayload, TableDataState } from 'src/interfaces/store.inrerfaces';
+import { ActiveCell, CategoryData } from 'src/components/shared/table/table.interfaces';
+import { DeleteItemPayload, TableState } from 'src/interfaces/store.inrerfaces';
 
-const initialTableDataState: TableDataState = {
-  value: [
+const initialTableState: TableState = {
+  activeCell: {
+    row: 5,
+    column: 2,
+  },
+  data: [
     {
       id: uuid(),
-      name: 'Test category',
+      name: 'Test category 1',
       isChecked: true,
       description: 'Test category description',
       items: [
@@ -18,18 +22,29 @@ const initialTableDataState: TableDataState = {
         { id: uuid(), name: 'Test item 2', isChecked: true, description: 'Test item description' },
       ],
     },
+    {
+      id: uuid(),
+      name: 'Test category 2',
+      isChecked: true,
+      description: 'Test category description',
+      items: [
+        { id: uuid(), name: 'Test item 1', isChecked: true, description: 'Test item description' },
+        { id: uuid(), name: 'Test item 2', isChecked: true, description: 'Test item description' },
+        { id: uuid(), name: 'Test item 3', isChecked: true, description: 'Test item description' },
+      ],
+    },
   ],
 };
 
 const tableDataSlice = createSlice({
   name: 'tableData',
-  initialState: initialTableDataState,
+  initialState: initialTableState,
   reducers: {
     setTableData: (state, action: PayloadAction<CategoryData[]>): void => {
-      state.value = action.payload;
+      state.data = action.payload;
     },
     deleteCategory: (state, action: PayloadAction<string>): void => {
-      const categories = state.value;
+      const categories = state.data;
       const categoryIndex = categories.findIndex((category) => category.id === action.payload);
 
       if (categoryIndex >= 0) {
@@ -37,7 +52,7 @@ const tableDataSlice = createSlice({
       }
     },
     deleteItem: (state, action: PayloadAction<DeleteItemPayload>): void => {
-      const categories = state.value;
+      const categories = state.data;
       const category = categories.find((category) => category.id === action.payload.categoryId);
 
       if (category) {
@@ -55,9 +70,13 @@ const tableDataSlice = createSlice({
 const { setTableData, deleteCategory } = tableDataSlice.actions;
 
 const selectTableData = (state: RootState): CategoryData[] => {
-  return state.tableData.value;
+  return state.tableData.data;
 };
 
-export { tableDataSlice, selectTableData, setTableData, deleteCategory };
+const selectTableActiveCell = (state: RootState): ActiveCell => {
+  return state.tableData.activeCell;
+};
+
+export { tableDataSlice, selectTableData, selectTableActiveCell, setTableData, deleteCategory };
 
 export default tableDataSlice.reducer;
