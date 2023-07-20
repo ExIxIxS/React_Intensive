@@ -9,6 +9,11 @@ interface CategoryData extends TableItemData {
   items: TableItemData[];
 }
 
+interface ActiveCell {
+  row: number;
+  column: number;
+}
+
 interface TableProps {
   data: CategoryData[];
 }
@@ -24,9 +29,33 @@ interface ItemProps {
   rowIndex: number;
 }
 
-interface ActiveCell {
-  row: number;
-  column: number;
+type CellType = 'category name' | 'name' | 'description' | 'checkbox' | 'delete';
+
+interface TableCellProps {
+  type: CellType;
+  categoryId: string;
+  rowId?: string;
+  rowIndex: number;
+  columnIndex: number;
+  text?: string;
+  isChecked?: boolean;
+  itemsAmount?: number;
+  isExpanded?: boolean;
+  clickHandler?: () => void;
 }
 
-export type { TableItemData, CategoryData, TableProps, CategoryProps, ItemProps, ActiveCell };
+type MoveDirectionType = 'right' | 'left' | 'up' | 'down';
+
+type KeyArrowType = 'ArrowUp' | 'ArrowDown' | 'ArrowLeft' | 'ArrowRight';
+
+export type {
+  TableItemData,
+  CategoryData,
+  TableProps,
+  CategoryProps,
+  ItemProps,
+  ActiveCell,
+  TableCellProps,
+  MoveDirectionType,
+  KeyArrowType,
+};
