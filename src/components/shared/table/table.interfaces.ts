@@ -44,7 +44,7 @@ interface TableCellProps {
   clickHandler?: () => void;
 }
 
-type MoveDirectionType = 'right' | 'left' | 'up' | 'down';
+type MoveDirectionType = 'right' | 'left' | 'up' | 'down' | 'next';
 
 type KeyArrowType = 'ArrowUp' | 'ArrowDown' | 'ArrowLeft' | 'ArrowRight';
 

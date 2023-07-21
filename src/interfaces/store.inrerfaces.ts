@@ -21,9 +21,32 @@ interface TableState {
   activeCell: ActiveCell;
 }
 
-interface DeleteItemPayload {
+interface CategoryBasicPayload {
   categoryId: string;
+}
+
+interface CategoryTextPayload extends CategoryBasicPayload {
+  text: string;
+}
+
+interface RowItemBasicPayload extends CategoryBasicPayload {
   itemId: string;
 }
 
-export type { DeviceType, Resolution, MediaQuery, MediaQueryState, TableState, DeleteItemPayload };
+interface RowItemTextPayload extends RowItemBasicPayload {
+  categoryId: string;
+  itemId: string;
+  text: string;
+}
+
+export type {
+  DeviceType,
+  Resolution,
+  MediaQuery,
+  MediaQueryState,
+  TableState,
+  CategoryBasicPayload,
+  CategoryTextPayload,
+  RowItemBasicPayload,
+  RowItemTextPayload,
+};

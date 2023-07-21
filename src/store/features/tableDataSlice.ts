@@ -8,7 +8,12 @@ import {
   CategoryData,
   MoveDirectionType,
 } from 'src/components/shared/table/table.interfaces';
-import { DeleteItemPayload, TableState } from 'src/interfaces/store.inrerfaces';
+import {
+  CategoryTextPayload,
+  RowItemBasicPayload,
+  RowItemTextPayload,
+  TableState,
+} from 'src/interfaces/store.inrerfaces';
 
 function getRowsAmount(data: CategoryData[]) {
   return data.reduce((rowsAmount, categoryData) => rowsAmount + 1 + categoryData.items.length, 0);
@@ -20,10 +25,7 @@ const initCell = {
 };
 
 const initialTableState: TableState = {
-  activeCell: {
-    row: 1,
-    column: 0,
-  },
+  activeCell: initCell,
   data: [
     {
       id: uuid(),
@@ -56,6 +58,57 @@ const tableDataSlice = createSlice({
     setTableData: (state, action: PayloadAction<CategoryData[]>): void => {
       state.data = action.payload;
     },
+    setCategoryName: (state, action: PayloadAction<CategoryTextPayload>): void => {
+      const category = state.data.find((category) => category.id === action.payload.categoryId);
+
+      if (category) {
+        category.name = action.payload.text;
+      }
+    },
+    setRowItemName: (state, action: PayloadAction<RowItemTextPayload>): void => {
+      const category = state.data.find((category) => category.id === action.payload.categoryId);
+
+      if (category) {
+        const rowItem = category.items.find((rowItem) => rowItem.id === action.payload.itemId);
+        if (rowItem) {
+          rowItem.name = action.payload.text;
+        }
+      }
+    },
+    setCategoryDescription: (state, action: PayloadAction<CategoryTextPayload>): void => {
+      const category = state.data.find((category) => category.id === action.payload.categoryId);
+
+      if (category) {
+        category.description = action.payload.text;
+      }
+    },
+    setRowItemDescription: (state, action: PayloadAction<RowItemTextPayload>): void => {
+      const category = state.data.find((category) => category.id === action.payload.categoryId);
+
+      if (category) {
+        const rowItem = category.items.find((rowItem) => rowItem.id === action.payload.itemId);
+        if (rowItem) {
+          rowItem.description = action.payload.text;
+        }
+      }
+    },
+    toggleCategoryCheckbox: (state, action: PayloadAction<CategoryTextPayload>): void => {
+      const category = state.data.find((category) => category.id === action.payload.categoryId);
+
+      if (category) {
+        category.isChecked = !category.isChecked;
+      }
+    },
+    toggleRowItemCheckbox: (state, action: PayloadAction<RowItemBasicPayload>): void => {
+      const category = state.data.find((category) => category.id === action.payload.categoryId);
+
+      if (category) {
+        const rowItem = category.items.find((rowItem) => rowItem.id === action.payload.itemId);
+        if (rowItem) {
+          rowItem.isChecked = !rowItem.isChecked;
+        }
+      }
+    },
     deleteCategory: (state, action: PayloadAction<string>): void => {
       const categories = state.data;
       const categoryIndex = categories.findIndex((category) => category.id === action.payload);
@@ -65,7 +118,7 @@ const tableDataSlice = createSlice({
         state.activeCell = initCell;
       }
     },
-    deleteItem: (state, action: PayloadAction<DeleteItemPayload>): void => {
+    deleteItem: (state, action: PayloadAction<RowItemBasicPayload>): void => {
       const categories = state.data;
       const category = categories.find((category) => category.id === action.payload.categoryId);
 
@@ -86,27 +139,42 @@ const tableDataSlice = createSlice({
       const direction = action.payload;
       const activeCell = state.activeCell;
 
+      const rowTopLimit = 0;
+      const columnLeftLimit = 0;
+      const columnRightLimit = 3;
+      const rowsAmount = getRowsAmount(state.data);
+
       switch (direction) {
         case 'up': {
-          const rowTopLimit = 0;
           activeCell.row = activeCell.row > rowTopLimit ? activeCell.row - 1 : activeCell.row;
           break;
         }
         case 'down': {
-          const rowsAmount = getRowsAmount(state.data);
           activeCell.row = activeCell.row + 1 < rowsAmount ? activeCell.row + 1 : activeCell.row;
           break;
         }
         case 'left': {
-          const columnLeftLimit = 0;
           activeCell.column =
             activeCell.column > columnLeftLimit ? activeCell.column - 1 : activeCell.column;
           break;
         }
         case 'right': {
-          const columnRightLimit = 3;
           activeCell.column =
             activeCell.column < columnRightLimit ? activeCell.column + 1 : activeCell.column;
+          break;
+        }
+        case 'next': {
+          if (activeCell.column < columnRightLimit) {
+            activeCell.column = activeCell.column + 1;
+            break;
+          }
+
+          if (activeCell.row + 1 < rowsAmount) {
+            activeCell.column = columnLeftLimit;
+            activeCell.row = activeCell.row + 1;
+            break;
+          }
+
           break;
         }
         default:
