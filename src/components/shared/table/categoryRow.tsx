@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 import TableCell from 'src/components/shared/table/tableCell';
 import TableRow from 'src/components/shared/table/tableRow';
@@ -6,11 +7,34 @@ import TableRow from 'src/components/shared/table/tableRow';
 import { CategoryProps } from 'src/components/shared/table/table.interfaces';
 
 import styles from 'src/components/shared/table/table.module.scss';
+import { selectTableActiveCell } from 'src/store/features/tableDataSlice';
 
 function CategoryRow(props: CategoryProps): JSX.Element {
   const [isExpanded, setIsExpanded] = useState(false);
+  const activeCell = useSelector(selectTableActiveCell);
 
   const toogleIsExpanded = () => setIsExpanded(!isExpanded);
+
+  const expand = () => setIsExpanded(true);
+
+  const isActiveCellInItems = (): boolean => {
+    if (!props.data.items.length) {
+      return false;
+    }
+
+    const firstRowItemIndex = props.rowIndex + 1;
+
+    const rowLimits: { min: number; max: number } = {
+      min: firstRowItemIndex,
+      max: firstRowItemIndex + props.data.items.length - 1,
+    };
+
+    return activeCell.row >= rowLimits.min && activeCell.row <= rowLimits.max;
+  };
+
+  if (isActiveCellInItems() && !isExpanded) {
+    expand();
+  }
 
   return (
     <>

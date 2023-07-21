@@ -129,6 +129,7 @@ function TableCell(props: TableCellProps): JSX.Element {
         break;
       }
       case 'delete': {
+        deleteItem();
         break;
       }
       case 'category name':
