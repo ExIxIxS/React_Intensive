@@ -13,6 +13,10 @@ html {
           box-sizing: inherit;
 }
 
+[type=checkbox]:hover {
+  cursor: pointer;
+}
+
 body {
   font-family: 'Rubik', 'sans serif';
   font-weight: $font-weight-normal;
@@ -28,4 +32,9 @@ main {
   align-items: center;
   justify-content: space-evenly;
   padding-bottom: 80px;
+}
+
+.page {
+  width: 100%;
+  overflow: auto;
 }

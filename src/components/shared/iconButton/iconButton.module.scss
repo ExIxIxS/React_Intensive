@@ -1,12 +1,13 @@
 @import 'src/styles/variables';
 
 $background-color: $background-color-icons;
-$button-size: $round-button-size-default;
 $border-color: $background-color-main-2;
+$button-large-size: $round-button-size-default;
+$button-medium-size: calc(($round-button-size-default / 3) * 2);
+$button-small-size: calc($round-button-size-default / 3);
 
 .button {
-  width: $button-size;
-  height: $button-size;
+
   padding: 0;
   overflow: hidden;
   display: flex;
@@ -16,9 +17,24 @@ $border-color: $background-color-main-2;
   background-color: $background-color;
   border-radius: 50%;
   border-color: $border-color;
+
+  &--large {
+    width: $button-large-size;
+    height: $button-large-size;
+  }
+
+  &--medium {
+    width: $button-medium-size;
+    height: $button-medium-size;
+  }
+
+  &--small {
+    width: $button-small-size;
+    height: $button-small-size;
+  }
 }
 
-.button {
+.button:hover {
   cursor: pointer;
 }
 
