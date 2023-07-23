@@ -37,7 +37,7 @@ const tableDataSlice = createSlice({
 
       state.data.push(newCategoryData);
       state.activeCell = {
-        row: state.data.length - 1,
+        row: getRowsAmount(state.data) - 1,
         column: 0,
       };
     },
@@ -48,10 +48,7 @@ const tableDataSlice = createSlice({
         const newItemData = getNewRowItemData();
 
         category.items.push(newItemData);
-        state.activeCell = {
-          row: getRowsAmount(state.data) - 1,
-          column: 0,
-        };
+        state.activeCell = initCell;
       }
     },
     setTableData: (state, action: PayloadAction<CategoryData[]>): void => {

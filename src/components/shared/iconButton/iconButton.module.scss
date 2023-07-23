@@ -3,8 +3,8 @@
 $background-color: $background-color-icons;
 $border-color: $background-color-main-2;
 $button-large-size: $round-button-size-default;
-$button-medium-size: ($round-button-size-default / 3) * 2;
-$button-small-size: $round-button-size-default / 3;
+$button-medium-size: calc(($round-button-size-default / 3) * 2);
+$button-small-size: calc($round-button-size-default / 3);
 
 .button {
 

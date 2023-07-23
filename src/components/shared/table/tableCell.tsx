@@ -1,12 +1,4 @@
-import {
-  ChangeEvent,
-  KeyboardEvent,
-  MouseEvent,
-  ReactNode,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import { ChangeEvent, KeyboardEvent, MouseEvent, useEffect, useRef, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { PayloadAction } from '@reduxjs/toolkit';
@@ -28,9 +20,7 @@ import {
   TableCellProps,
 } from 'src/components/shared/table/table.interfaces';
 import { RowItemBasicPayload } from 'src/interfaces/store.inrerfaces';
-
-import styles from 'src/components/shared/table/table.module.scss';
-import IconButton from '../iconButton';
+import CellContent from './cellContent';
 
 function TableCell(props: TableCellProps): JSX.Element {
   const activeCell = useSelector(selectTableActiveCell);
@@ -80,7 +70,7 @@ function TableCell(props: TableCellProps): JSX.Element {
     }
   };
 
-  const deleteItem = () => {
+  const deleteItem = (): void => {
     let action: PayloadAction<string> | PayloadAction<RowItemBasicPayload> = {
       type: 'tableData/deleteCategory',
       payload: props.categoryId,
@@ -181,88 +171,15 @@ function TableCell(props: TableCellProps): JSX.Element {
     dispatch(action);
   };
 
-  let cellContent: ReactNode;
-
-  switch (props.type) {
-    case 'checkbox': {
-      if (typeof props.isChecked === 'boolean') {
-        cellContent = (
-          <input
-            type="checkbox"
-            checked={props.isChecked}
-            onClick={toogleCheckbox}
-            tabIndex={0}
-            readOnly
-          />
-        );
-      }
-
-      break;
-    }
-    case 'delete': {
-      cellContent = (
-        <IconButton
-          iconSrc="src/assets/icons/trash.png"
-          alt="delete button"
-          handleClick={deleteItem}
-          size="medium"
-        />
-      );
-      break;
-    }
-    case 'category name': {
-      if (typeof props.isExpanded === 'boolean' && typeof props.clickHandler === 'function') {
-        const textCellContent = isInputEdited ? (
-          <input
-            type="text"
-            value={inputValue}
-            onChange={handleInputChange}
-            onBlur={handleCellBlur}
-            autoFocus
-          />
-        ) : (
-          <span>{props.text ?? ''}</span>
-        );
-
-        cellContent = (
-          <>
-            <div className={styles['category-name-content']}>
-              {textCellContent}
-              <span>{props.itemsAmount ? `(${props.itemsAmount})` : ''}</span>
-              <IconButton
-                iconSrc={
-                  props.isExpanded ? 'src/assets/icons/minus.png' : 'src/assets/icons/plus.png'
-                }
-                alt="expand button"
-                handleClick={props.clickHandler}
-                size="small"
-              />
-            </div>
-          </>
-        );
-      }
-
-      break;
-    }
-    case 'name':
-    case 'description':
-    default: {
-      if (typeof props.text === 'string') {
-        cellContent = isInputEdited ? (
-          <input
-            type="text"
-            value={inputValue}
-            onChange={handleInputChange}
-            onBlur={handleCellBlur}
-            autoFocus
-          />
-        ) : (
-          <span>{props.text}</span>
-        );
-      }
-      break;
-    }
-  }
+  const cellContentProps = {
+    tableProps: props,
+    isInputEdited: isInputEdited,
+    inputValue: inputValue,
+    inputChangeHandler: handleInputChange,
+    toogleCheckboxHandler: toogleCheckbox,
+    deleteItemHandler: deleteItem,
+    cellBlurHandler: handleCellBlur,
+  };
 
   return (
     <td
@@ -272,7 +189,7 @@ function TableCell(props: TableCellProps): JSX.Element {
       ref={cellRef}
       tabIndex={0}
     >
-      {cellContent}
+      <CellContent {...cellContentProps} />
     </td>
   );
 }

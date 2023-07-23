@@ -1,3 +1,5 @@
+import { ChangeEvent } from 'react';
+
 interface TableItemData {
   id: string;
   name: string;
@@ -53,6 +55,16 @@ type MoveDirectionType = 'right' | 'left' | 'up' | 'down' | 'next';
 
 type KeyArrowType = 'ArrowUp' | 'ArrowDown' | 'ArrowLeft' | 'ArrowRight';
 
+interface CellContentProps {
+  tableProps: TableCellProps;
+  isInputEdited: boolean;
+  inputValue: string;
+  toogleCheckboxHandler: () => void;
+  deleteItemHandler: () => void;
+  inputChangeHandler: (e: ChangeEvent<HTMLInputElement>) => void;
+  cellBlurHandler: () => void;
+}
+
 export type {
   TableItemData,
   CategoryData,
@@ -64,4 +76,5 @@ export type {
   TableCellProps,
   MoveDirectionType,
   KeyArrowType,
+  CellContentProps,
 };
