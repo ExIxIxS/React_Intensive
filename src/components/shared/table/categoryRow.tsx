@@ -9,6 +9,7 @@ import TableRow from 'src/components/shared/table/tableRow';
 import { CategoryProps } from 'src/components/shared/table/table.interfaces';
 
 import styles from 'src/components/shared/table/table.module.scss';
+import NewRowButton from './newRowButton';
 
 function CategoryRow(props: CategoryProps): JSX.Element {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -71,16 +72,19 @@ function CategoryRow(props: CategoryProps): JSX.Element {
           columnIndex={3}
         />
       </tr>
-      {isExpanded &&
-        props.data.items &&
-        props.data.items.map((item, index) => (
-          <TableRow
-            key={item.id}
-            categoryId={props.data.id}
-            data={item}
-            rowIndex={props.rowIndex + index + 1}
-          />
-        ))}
+      {isExpanded && props.data.items && (
+        <>
+          <NewRowButton type="item" categoryId={props.data.id} />
+          {props.data.items.map((item, index) => (
+            <TableRow
+              key={item.id}
+              categoryId={props.data.id}
+              data={item}
+              rowIndex={props.rowIndex + index + 1}
+            />
+          ))}
+        </>
+      )}
     </>
   );
 }

@@ -18,6 +18,11 @@ interface TableProps {
   data: CategoryData[];
 }
 
+interface NewRowButtonProps {
+  type: 'category' | 'item';
+  categoryId?: string;
+}
+
 interface CategoryProps {
   data: CategoryData;
   rowIndex: number;
@@ -52,6 +57,7 @@ export type {
   TableItemData,
   CategoryData,
   TableProps,
+  NewRowButtonProps,
   CategoryProps,
   ItemProps,
   ActiveCell,

@@ -3,6 +3,8 @@ import { v4 as uuid } from 'uuid';
 
 import { RootState } from 'src/store';
 
+import { getNewCategoryData, getNewRowItemData, getRowsAmount } from 'src/utils/tableDataFunctions';
+
 import {
   ActiveCell,
   CategoryData,
@@ -15,10 +17,6 @@ import {
   RowItemTextPayload,
   TableState,
 } from 'src/interfaces/store.inrerfaces';
-
-function getRowsAmount(data: CategoryData[]) {
-  return data.reduce((rowsAmount, categoryData) => rowsAmount + 1 + categoryData.items.length, 0);
-}
 
 const initCell = {
   row: 0,
@@ -56,6 +54,20 @@ const tableDataSlice = createSlice({
   name: 'tableData',
   initialState: initialTableState,
   reducers: {
+    createNewCategory: (state): void => {
+      const newCategoryData = getNewCategoryData();
+
+      state.data.push(newCategoryData);
+    },
+    createNewRowItem: (state, action: PayloadAction<CategoryBasicPayload>): void => {
+      const category = state.data.find((category) => category.id === action.payload.categoryId);
+
+      if (category) {
+        const newItemData = getNewRowItemData();
+
+        category.items.push(newItemData);
+      }
+    },
     setTableData: (state, action: PayloadAction<CategoryData[]>): void => {
       state.data = action.payload;
     },
