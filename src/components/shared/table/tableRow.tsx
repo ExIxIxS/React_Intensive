@@ -6,7 +6,7 @@ import styles from 'src/components/shared/table/table.module.scss';
 
 function TableRow(props: ItemProps): JSX.Element {
   return (
-    <tr className={styles['table-item']}>
+    <tr className={styles['table-row']}>
       <TableCell
         type="name"
         categoryId={props.categoryId}

@@ -27,9 +27,10 @@ import {
   MoveDirectionType,
   TableCellProps,
 } from 'src/components/shared/table/table.interfaces';
+import { RowItemBasicPayload } from 'src/interfaces/store.inrerfaces';
 
 import styles from 'src/components/shared/table/table.module.scss';
-import { RowItemBasicPayload } from 'src/interfaces/store.inrerfaces';
+import IconButton from '../iconButton';
 
 function TableCell(props: TableCellProps): JSX.Element {
   const activeCell = useSelector(selectTableActiveCell);
@@ -208,9 +209,12 @@ function TableCell(props: TableCellProps): JSX.Element {
     }
     case 'delete': {
       cellContent = (
-        <button className={styles['delete-button']} onClick={deleteItem}>
-          Delete
-        </button>
+        <IconButton
+          iconSrc="src/assets/icons/trash.png"
+          alt="delete button"
+          handleClick={deleteItem}
+          size="medium"
+        />
       );
       break;
     }
@@ -230,11 +234,18 @@ function TableCell(props: TableCellProps): JSX.Element {
 
         cellContent = (
           <>
-            {textCellContent}
-            <button className={styles['expand-button']} onClick={props.clickHandler}>
-              {props.isExpanded ? '-' : '+'}
-            </button>
-            <span>{props.itemsAmount ? `(${props.itemsAmount})` : ''}</span>
+            <div className={styles['category-name-content']}>
+              {textCellContent}
+              <span>{props.itemsAmount ? `(${props.itemsAmount})` : ''}</span>
+              <IconButton
+                iconSrc={
+                  props.isExpanded ? 'src/assets/icons/minus.png' : 'src/assets/icons/plus.png'
+                }
+                alt="expand button"
+                handleClick={props.clickHandler}
+                size="small"
+              />
+            </div>
           </>
         );
       }
@@ -266,7 +277,6 @@ function TableCell(props: TableCellProps): JSX.Element {
       className={getCellClassName(activeCell, props.rowIndex, props.columnIndex)}
       onClick={handleCellClick}
       onKeyDown={handleKeyDown}
-      onFocus={() => console.log('Cell focused')}
       ref={cellRef}
       tabIndex={0}
     >

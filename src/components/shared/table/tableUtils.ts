@@ -14,9 +14,17 @@ function isCellActive(cell: ActiveCell, activeCell: ActiveCell) {
 }
 
 function getCellClassName(activeCell: ActiveCell, rowIndex: number, columnIndex: number): string {
-  return activeCell.row === rowIndex && activeCell.column === columnIndex
-    ? styles['active-cell']
-    : '';
+  const checkboxColumnIndex = 1;
+  const deleteColumnIndex = 3;
+
+  const activeClassName =
+    activeCell.row === rowIndex && activeCell.column === columnIndex ? styles['cell--active'] : '';
+
+  const checkBoxClassName = columnIndex === checkboxColumnIndex ? styles['cell--checkbox'] : '';
+
+  const deleteClassName = columnIndex === deleteColumnIndex ? styles['cell--delete'] : '';
+
+  return `${styles['cell']} ${activeClassName} ${checkBoxClassName} ${deleteClassName}`;
 }
 
 function isArrowKeyType(type: string): boolean {

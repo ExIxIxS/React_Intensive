@@ -10,11 +10,11 @@ function Table(props: TableProps): JSX.Element {
   return (
     <table className={styles['table']}>
       <thead className={styles['table-header']}>
-        <tr>
-          <th>Name</th>
-          <th>Checkbox</th>
-          <th>Description</th>
-          <th>Delete</th>
+        <tr className={styles['table-row']}>
+          <th className={styles['cell']}>Name</th>
+          <th className={styles['cell']}>Checkbox</th>
+          <th className={styles['cell']}>Description</th>
+          <th className={styles['cell']}>Delete</th>
         </tr>
       </thead>
       <tbody>

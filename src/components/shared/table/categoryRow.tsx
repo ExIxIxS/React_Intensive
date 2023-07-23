@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 
+import { selectTableActiveCell } from 'src/store/features/tableDataSlice';
+
 import TableCell from 'src/components/shared/table/tableCell';
 import TableRow from 'src/components/shared/table/tableRow';
 
 import { CategoryProps } from 'src/components/shared/table/table.interfaces';
 
 import styles from 'src/components/shared/table/table.module.scss';
-import { selectTableActiveCell } from 'src/store/features/tableDataSlice';
 
 function CategoryRow(props: CategoryProps): JSX.Element {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -38,7 +39,7 @@ function CategoryRow(props: CategoryProps): JSX.Element {
 
   return (
     <>
-      <tr className={`${styles['table-item']} ${styles['category-item']}`}>
+      <tr className={styles['table-row']}>
         <TableCell
           type="category name"
           categoryId={props.data.id}
