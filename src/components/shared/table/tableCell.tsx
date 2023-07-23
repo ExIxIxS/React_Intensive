@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { PayloadAction } from '@reduxjs/toolkit';
 
 import { AppDispatch } from 'src/store';
-import { selectTableActiveCell } from 'src/store/features/tableDataSlice';
+import { selectTableActiveCell, tableDataActions } from 'src/store/features/tableDataSlice';
 import {
   getCellClassName,
   getSaveInputAction,
@@ -48,7 +48,6 @@ function TableCell(props: TableCellProps): JSX.Element {
     };
 
     if (cellRef.current && isCellActive(cell, activeCell)) {
-      console.log('Focus!');
       cellRef.current.focus();
     }
   }, [activeCell]);
@@ -61,7 +60,6 @@ function TableCell(props: TableCellProps): JSX.Element {
 
   useEffect(() => {
     if (inputValue) {
-      console.log('input value -->', inputValue);
       saveInputToStore(inputValue);
     }
   }, [inputValue]);
@@ -99,10 +97,7 @@ function TableCell(props: TableCellProps): JSX.Element {
   };
 
   const handleKeyDown = (event: KeyboardEvent): void => {
-    console.log('Cell handler!!!');
-
     if (event.key === 'Enter') {
-      console.log('Cell Enter!');
       if (!isInputDirty) {
         setIsInputDirty(true);
       }
@@ -110,10 +105,8 @@ function TableCell(props: TableCellProps): JSX.Element {
     }
 
     if (event.key.includes('Tab')) {
-      const moveToNextAction: PayloadAction<MoveDirectionType> = {
-        type: 'tableData/moveActiveCell',
-        payload: 'next',
-      };
+      const moveToNextActionPayload: MoveDirectionType = 'next';
+      const moveToNextAction = tableDataActions.moveActiveCell(moveToNextActionPayload);
 
       dispatch(moveToNextAction);
     }
@@ -152,13 +145,13 @@ function TableCell(props: TableCellProps): JSX.Element {
   const handleArrow = (keyArrowType: string): void => {
     if (isArrowKeyType(keyArrowType)) {
       const validKeyArrowType = keyArrowType as KeyArrowType;
+      const moveActionPayload: MoveDirectionType = validKeyArrowType
+        .replace('Arrow', '')
+        .toLowerCase() as MoveDirectionType;
 
-      const action: PayloadAction<MoveDirectionType> = {
-        type: 'tableData/moveActiveCell',
-        payload: validKeyArrowType.replace('Arrow', '').toLowerCase() as MoveDirectionType,
-      };
+      const moveAction = tableDataActions.moveActiveCell(moveActionPayload);
 
-      dispatch(action);
+      dispatch(moveAction);
     }
   };
 
@@ -178,13 +171,12 @@ function TableCell(props: TableCellProps): JSX.Element {
   };
 
   const setCellActive = (): void => {
-    const action: PayloadAction<ActiveCell> = {
-      type: 'tableData/setActiveCell',
-      payload: {
-        row: props.rowIndex,
-        column: props.columnIndex,
-      },
+    const payload: ActiveCell = {
+      row: props.rowIndex,
+      column: props.columnIndex,
     };
+
+    const action = tableDataActions.setActiveCell(payload);
 
     dispatch(action);
   };

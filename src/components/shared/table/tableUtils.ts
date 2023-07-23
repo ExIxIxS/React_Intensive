@@ -8,6 +8,7 @@ import {
   RowItemBasicPayload,
   RowItemTextPayload,
 } from 'src/interfaces/store.inrerfaces';
+import { tableDataActions } from 'src/store/features/tableDataSlice';
 
 function isCellActive(cell: ActiveCell, activeCell: ActiveCell) {
   return cell.row === activeCell.row && cell.column === activeCell.column;
@@ -39,45 +40,43 @@ function getSaveInputAction(
 ): PayloadAction<CategoryTextPayload | RowItemTextPayload> | undefined {
   switch (cellProps.type) {
     case 'category name': {
-      return {
-        type: 'tableData/setCategoryName',
-        payload: {
-          categoryId: cellProps.categoryId,
-          text: inputValue,
-        },
+      const payload = {
+        categoryId: cellProps.categoryId,
+        text: inputValue,
       };
+
+      return tableDataActions.setCategoryName(payload);
     }
     case 'name': {
       if (cellProps.rowId) {
-        return {
-          type: 'tableData/setRowItemName',
-          payload: {
-            categoryId: cellProps.categoryId,
-            itemId: cellProps.rowId,
-            text: inputValue,
-          },
+        const payload = {
+          categoryId: cellProps.categoryId,
+          itemId: cellProps.rowId,
+          text: inputValue,
         };
+
+        return tableDataActions.setRowItemName(payload);
       }
 
       return;
     }
     case 'description': {
-      return cellProps.rowId
-        ? {
-            type: 'tableData/setRowItemDescription',
-            payload: {
-              categoryId: cellProps.categoryId,
-              itemId: cellProps.rowId,
-              text: inputValue,
-            },
-          }
-        : {
-            type: 'tableData/setCategoryDescription',
-            payload: {
-              categoryId: cellProps.categoryId,
-              text: inputValue,
-            },
-          };
+      if (cellProps.rowId) {
+        const payload = {
+          categoryId: cellProps.categoryId,
+          itemId: cellProps.rowId,
+          text: inputValue,
+        };
+
+        return tableDataActions.setRowItemDescription(payload);
+      }
+
+      const payload = {
+        categoryId: cellProps.categoryId,
+        text: inputValue,
+      };
+
+      return tableDataActions.setCategoryDescription(payload);
     }
 
     default:
@@ -88,20 +87,20 @@ function getSaveInputAction(
 function getToogleCheckboxAction(
   cellProps: TableCellProps
 ): PayloadAction<CategoryBasicPayload | RowItemBasicPayload> {
-  return cellProps.rowId
-    ? {
-        type: 'tableData/toggleRowItemCheckbox',
-        payload: {
-          categoryId: cellProps.categoryId,
-          itemId: cellProps.rowId,
-        },
-      }
-    : {
-        type: 'tableData/toggleCategoryCheckbox',
-        payload: {
-          categoryId: cellProps.categoryId,
-        },
-      };
+  if (cellProps.rowId) {
+    const payload = {
+      categoryId: cellProps.categoryId,
+      itemId: cellProps.rowId,
+    };
+
+    return tableDataActions.toggleRowItemCheckbox(payload);
+  }
+
+  const payload = {
+    categoryId: cellProps.categoryId,
+  };
+
+  return tableDataActions.toggleCategoryCheckbox(payload);
 }
 
 export {

@@ -13,6 +13,10 @@ html {
           box-sizing: inherit;
 }
 
+[type=checkbox]:hover {
+  cursor: pointer;
+}
+
 body {
   font-family: 'Rubik', 'sans serif';
   font-weight: $font-weight-normal;

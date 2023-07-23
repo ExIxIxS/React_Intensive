@@ -9,6 +9,7 @@ import {
   MoveDirectionType,
 } from 'src/components/shared/table/table.interfaces';
 import {
+  CategoryBasicPayload,
   CategoryTextPayload,
   RowItemBasicPayload,
   RowItemTextPayload,
@@ -92,7 +93,7 @@ const tableDataSlice = createSlice({
         }
       }
     },
-    toggleCategoryCheckbox: (state, action: PayloadAction<CategoryTextPayload>): void => {
+    toggleCategoryCheckbox: (state, action: PayloadAction<CategoryBasicPayload>): void => {
       const category = state.data.find((category) => category.id === action.payload.categoryId);
 
       if (category) {
@@ -184,8 +185,6 @@ const tableDataSlice = createSlice({
   },
 });
 
-const { setTableData, deleteCategory } = tableDataSlice.actions;
-
 const selectTableData = (state: RootState): CategoryData[] => {
   return state.tableData.data;
 };
@@ -194,6 +193,8 @@ const selectTableActiveCell = (state: RootState): ActiveCell => {
   return state.tableData.activeCell;
 };
 
-export { tableDataSlice, selectTableData, selectTableActiveCell, setTableData, deleteCategory };
+const tableDataActions = tableDataSlice.actions;
+
+export { tableDataSlice, selectTableData, selectTableActiveCell, tableDataActions };
 
 export default tableDataSlice.reducer;
