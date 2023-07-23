@@ -1,14 +1,17 @@
 import { PayloadAction } from '@reduxjs/toolkit';
+
+import { tableDataActions } from 'src/store/features/tableDataSlice';
+
 import { ActiveCell, TableCellProps } from 'src/components/shared/table/table.interfaces';
 
-import styles from 'src/components/shared/table/table.module.scss';
 import {
   CategoryBasicPayload,
   CategoryTextPayload,
   RowItemBasicPayload,
   RowItemTextPayload,
 } from 'src/interfaces/store.inrerfaces';
-import { tableDataActions } from 'src/store/features/tableDataSlice';
+
+import styles from 'src/components/shared/table/table.module.scss';
 
 function isCellActive(cell: ActiveCell, activeCell: ActiveCell) {
   return cell.row === activeCell.row && cell.column === activeCell.column;

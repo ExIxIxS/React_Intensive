@@ -1,8 +1,9 @@
 import { useDispatch } from 'react-redux';
+import { tableDataActions } from 'src/store/features/tableDataSlice';
+
 import { NewRowButtonProps } from 'src/components/shared/table/table.interfaces';
 
 import styles from 'src/components/shared/table/table.module.scss';
-import { tableDataActions } from 'src/store/features/tableDataSlice';
 
 function NewRowButton(props: NewRowButtonProps): JSX.Element {
   const dispatch = useDispatch();

@@ -5,11 +5,11 @@ import { selectTableActiveCell } from 'src/store/features/tableDataSlice';
 
 import TableCell from 'src/components/shared/table/tableCell';
 import TableRow from 'src/components/shared/table/tableRow';
+import NewRowButton from './newRowButton';
 
 import { CategoryProps } from 'src/components/shared/table/table.interfaces';
 
 import styles from 'src/components/shared/table/table.module.scss';
-import NewRowButton from './newRowButton';
 
 function CategoryRow(props: CategoryProps): JSX.Element {
   const [isExpanded, setIsExpanded] = useState(false);

@@ -1,5 +1,4 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { v4 as uuid } from 'uuid';
 
 import { RootState } from 'src/store';
 
@@ -10,6 +9,7 @@ import {
   CategoryData,
   MoveDirectionType,
 } from 'src/components/shared/table/table.interfaces';
+
 import {
   CategoryBasicPayload,
   CategoryTextPayload,
@@ -25,29 +25,7 @@ const initCell = {
 
 const initialTableState: TableState = {
   activeCell: initCell,
-  data: [
-    {
-      id: uuid(),
-      name: 'Test category 1',
-      isChecked: true,
-      description: 'Test category description',
-      items: [
-        { id: uuid(), name: 'Test item 1', isChecked: true, description: 'Test item description' },
-        { id: uuid(), name: 'Test item 2', isChecked: true, description: 'Test item description' },
-      ],
-    },
-    {
-      id: uuid(),
-      name: 'Test category 2',
-      isChecked: true,
-      description: 'Test category description',
-      items: [
-        { id: uuid(), name: 'Test item 1', isChecked: true, description: 'Test item description' },
-        { id: uuid(), name: 'Test item 2', isChecked: true, description: 'Test item description' },
-        { id: uuid(), name: 'Test item 3', isChecked: true, description: 'Test item description' },
-      ],
-    },
-  ],
+  data: [],
 };
 
 const tableDataSlice = createSlice({
@@ -58,6 +36,10 @@ const tableDataSlice = createSlice({
       const newCategoryData = getNewCategoryData();
 
       state.data.push(newCategoryData);
+      state.activeCell = {
+        row: state.data.length - 1,
+        column: 0,
+      };
     },
     createNewRowItem: (state, action: PayloadAction<CategoryBasicPayload>): void => {
       const category = state.data.find((category) => category.id === action.payload.categoryId);
@@ -66,6 +48,10 @@ const tableDataSlice = createSlice({
         const newItemData = getNewRowItemData();
 
         category.items.push(newItemData);
+        state.activeCell = {
+          row: getRowsAmount(state.data) - 1,
+          column: 0,
+        };
       }
     },
     setTableData: (state, action: PayloadAction<CategoryData[]>): void => {

@@ -1,9 +1,9 @@
 import CategoryRow from 'src/components/shared/table/categoryRow';
+import NewRowButton from './newRowButton';
 
 import { TableProps } from 'src/components/shared/table/table.interfaces';
 
 import styles from 'src/components/shared/table/table.module.scss';
-import NewRowButton from './newRowButton';
 
 function Table(props: TableProps): JSX.Element {
   let nextCategoryIndex = 0;
